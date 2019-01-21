@@ -33,7 +33,7 @@ def register(request):
 	context={'form':form}
 	return render(request,'users/register.html',context)
 
-def login(request):
+def loginit(request):
 	"""Register a new user."""
 	if request.method!='POST':
 		form=AuthenticationForm()
