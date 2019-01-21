@@ -35,8 +35,8 @@ def register(request):
 def login(request):
 	"""Register a new user."""
 	if request.method!='POST':
+		return render(request,'users/login.html')
 		#Display the blank registration form
-		form=UserCreationForm()
 	else:
 		#Process the completed form
 		form=UserCreationForm(data=request.POST)
@@ -47,6 +47,5 @@ def login(request):
 			password=request.POST['password1'])
 			login(request,authenticated_user)
 			return HttpResponseRedirect(reverse('learning_logs:index'))
-	context={'form':form}
-	return render(request,'users/login.html',context)
+	return render(request,'users/login.html')
 
