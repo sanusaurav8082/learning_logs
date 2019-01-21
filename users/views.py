@@ -42,10 +42,9 @@ def login(request):
 		#Process the completed form
 		form=AuthenticationForm(data=request.POST)
 		if form.is_valid():
-			new_user=form.save()
 			#log the user in and then redirect to the homepage
-			authenticated_user=authenticate(username=new_user.username,
-			password=request.POST['password1'])
+			authenticated_user=authenticate(username=form.cleaned_data['username'],
+			password=form.cleaned_date['password'])
 			login(request,authenticated_user)
 			return HttpResponseRedirect(reverse('learning_logs:index'))
 	context={'form':form}
