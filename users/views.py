@@ -32,3 +32,21 @@ def register(request):
 	context={'form':form}
 	return render(request,'users/register.html',context)
 
+def login(request):
+	"""Register a new user."""
+	if request.method!='POST':
+		#Display the blank registration form
+		form=UserCreationForm()
+	else:
+		#Process the completed form
+		form=UserCreationForm(data=request.POST)
+		if form.is_valid():
+			new_user=form.save()
+			#log the user in and then redirect to the homepage
+			authenticated_user=authenticate(username=new_user.username,
+			password=request.POST['password1'])
+			login(request,authenticated_user)
+			return HttpResponseRedirect(reverse('learning_logs:index'))
+	context={'form':form}
+	return render(request,'users/login.html',context)
+
