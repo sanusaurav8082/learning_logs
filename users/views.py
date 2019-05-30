@@ -8,6 +8,7 @@ from django.contrib.auth import logout
 from django.shortcuts import render
 from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm
 # Create your views here.
 def logout_view(request):
 	"""Log the user out."""
@@ -31,4 +32,21 @@ def register(request):
 			return HttpResponseRedirect(reverse('learning_logs:index'))
 	context={'form':form}
 	return render(request,'users/register.html',context)
+
+def loginit(request):
+	"""Register a new user."""
+	if request.method!='POST':
+		form=AuthenticationForm()
+		#Display the blank registration form
+	else:
+		#Process the completed form
+		form=AuthenticationForm(data=request.POST)
+		if form.is_valid():
+			#log the user in and then redirect to the homepage
+			authenticated_user=authenticate(username=form.cleaned_data.get('username'),
+			password=form.cleaned_data.get('password'))
+			login(request,authenticated_user)
+			return HttpResponseRedirect(reverse('learning_logs:index'))
+	context={'form':form}
+	return render(request,'users/login.html',context)
 
