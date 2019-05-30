@@ -3,7 +3,11 @@ import os
 import sys
 
 if __name__ == "__main__":
+<<<<<<< HEAD
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "learning_log.settings")
+=======
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "gameofthrones.settings")
+>>>>>>> 5377bd8f40d34210fcaaac57d56c5bf6579e8307
     try:
         from django.core.management import execute_from_command_line
     except ImportError:
