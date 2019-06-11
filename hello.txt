@@ -1,2 +1,0 @@
-interactive mode git check
-fo rchecking branching
